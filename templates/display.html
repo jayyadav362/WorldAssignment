@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load template_tags %}
+{% block content %}
+    <div class="col-lg-12">
+        {% for result in page_obj %}
+            {% if result|model_name == 'city' %}
+                <div class="row mb-2">
+                    <div class="col-lg-10 mx-auto">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="text-center text-decoration-underline">City</h5>
+                                <p class="fw-bold">Name: <span class="fw-normal">{{ result.name }}</span></p>
+                                <p class="fw-bold">District: <span class="fw-normal">{{ result.district }}</span></p>
+                                <p class="fw-bold">Population: <span class="fw-normal">{{ result.population }}</span></p>
+                                <p class="fw-bold">Country: <span class="fw-normal">{{ result.countrycode.name }}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% elif result|model_name == 'country' %}
+                <div class="row mb-2">
+                    <div class="col-lg-10 mx-auto">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="text-center text-decoration-underline">Country</h5>
+                                <p class="fw-bold">Name: <span class="fw-normal">{{ result.name }}</span></p>
+                                <p class="fw-bold">Code: <span class="fw-normal">{{ result.code }}</span></p>
+                                <p class="fw-bold">Continent: <span class="fw-normal">{{ result.continent }}</span></p>
+                                <p class="fw-bold">Population: <span class="fw-normal">{{ result.population }}</span></p>
+                                <p class="fw-bold">Local Name: <span class="fw-normal">{{ result.localname }}</span></p>
+                                <p class="fw-bold">Surface Area: <span class="fw-normal">{{ result.surfacearea }}</span></p>
+                                <p class="fw-bold">Capital: <span class="fw-normal">{{ result.capital }}</span></p>
+                                <p class="fw-bold">Region: <span class="fw-normal">{{ result.region }}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% elif result|model_name == 'countrylanguage' %}
+                <div class="row mb-2">
+                    <div class="col-lg-10 mx-auto">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="text-center text-decoration-underline">Country Language</h5>
+                                <p class="fw-bold">Language: <span class="fw-normal">{{ result.language }}</span></p>
+                                <p class="fw-bold">Country: <span class="fw-normal">{{ result.countrycode.name }}</span></p>
+                                <p class="fw-bold">Percentage: <span class="fw-normal">{{ result.percentage }}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% empty %}
+            <p class="text-danger fw-bold">No result found!.</p>
+        {% endfor %}
+    {% if count > 0 %}
+    <nav aria-label="Page navigation example " style="margin-top: 10px!important;">
+    <div class="row">
+            <ul class="small">Showing <b>{{ page_obj.number }}</b> / <b>{{ page_obj.paginator.num_pages }}</b> entries</ul>
+            <ul class="pagination pagination-sm ml-auto mr-4">
+                  {% if page_obj.has_previous %}
+                    <li class="page-item ">
+                        <a href="?search={{ search }}&page={{ page_obj.previous_page_number }}" class="page-link"><i class="fas fa-long-arrow-alt-left  text-muted"> Previous</i></a>
+                    </li>
+                  {% else %}
+                      <li class="page-item disabled mr-2">
+                        <i class="fas fa-long-arrow-alt-left  page-link text-muted"> Previous</i>
+                    </li>
+                  {% endif %}
+                  {% if page_obj.paginator.num_pages == 1 %}
+                      <li class="page-item active"><a href="#" class="page-link">{{ page_obj.number }}</a></li>
+                  {% elif page_obj.number == 1 %}
+                      <li class="page-item active"><a href="#" class="page-link">{{ page_obj.number }}</a></li>
+                      <li class="page-item "><a href="?search={{ search }}&page={{ page_obj.number|add:1 }}" class="page-link">{{ page_obj.number|add:1 }}</a></li>
+                      <li class="page-item "><a href="?search={{ search }}&page={{ page_obj.paginator.num_pages }}" class="page-link">{{ page_obj.paginator.num_pages }}</a></li>
+                  {% elif page_obj.number|add:-1 == 1 %}
+                      <li class="page-item "><a href="?search={{ search }}&page=1" class="page-link">1</a></li>
+                      <li class="page-item active"><a href="#" class="page-link">{{ page_obj.number }}</a></li>
+                      <li class="page-item "><a href="?search={{ search }}&page={{ page_obj.number|add:1 }}" class="page-link">{{ page_obj.number|add:1 }}</a></li>
+                      <li class="page-item "><a href="?search={{ search }}&page={{ page_obj.paginator.num_pages }}" class="page-link">{{ page_obj.paginator.num_pages }}</a></li>
+                  {% elif page_obj.number == page_obj.paginator.num_pages %}
+                      <li class="page-item "><a href="?search={{ search }}&page=1" class="page-link">1</a></li>
+                      <li class="page-item "><a href="?search={{ search }}&page={{ page_obj.number|add:-1 }}" class="page-link">{{ page_obj.number|add:-1 }}</a></li>
+                      <li class="page-item active"><a href="#" class="page-link">{{ page_obj.number }}</a></li>
+                  {% elif page_obj.number|add:1 == page_obj.paginator.num_pages %}
+                      <li class="page-item "><a href="?search={{ search }}&page=1" class="page-link">1</a></li>
+                      <li class="page-item "><a href="?search={{ search }}&page={{ page_obj.number|add:-1 }}" class="page-link">{{ page_obj.number|add:-1 }}</a></li>
+                      <li class="page-item active"><a href="#" class="page-link">{{ page_obj.number }}</a></li>
+                      <li class="page-item "><a href="?search={{ search }}&page={{ page_obj.paginator.num_pages }}" class="page-link">{{ page_obj.paginator.num_pages }}</a></li>
+                  {% else %}
+                      <li class="page-item "><a href="?search={{ search }}&page=1" class="page-link">1</a></li>
+                      <li class="page-item "><a href="?search={{ search }}&page={{ page_obj.number|add:-1 }}" class="page-link">{{ page_obj.number|add:-1 }}</a></li>
+                      <li class="page-item active"><a href="#" class="page-link">{{ page_obj.number }}</a></li>
+                      <li class="page-item "><a href="?search={{ search }}&page={{ page_obj.number|add:1 }}" class="page-link">{{ page_obj.number|add:1 }}</a></li>
+                      <li class="page-item "><a href="?search={{ search }}&page={{ page_obj.paginator.num_pages }}" class="page-link">{{ page_obj.paginator.num_pages }}</a></li>
+                  {% endif %}
+
+                  {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a href="?search={{ search }}&page={{ page_obj.next_page_number }}" class="page-link"><i class="fas fa-long-arrow-alt-right  text-muted"> Next</i></a>
+                    </li>
+                  {% else %}
+                      <li class="page-item disabled ml-2">
+                        <i class="fas fa-long-arrow-alt-right page-link  text-muted"> Next</i>
+                    </li>
+                  {% endif %}
+
+                </ul>
+    </div>
+        </nav>
+    {% endif %}
+    </div>
+{% endblock %}

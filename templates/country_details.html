@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="col-lg-12">
+        <div class="row mb-2">
+            <div class="col-lg-10 mx-auto">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="text-center text-decoration-underline">Country</h5>
+                        <p class="fw-bold">Name: <span class="fw-normal">{{ country.name }}</span></p>
+                        <p class="fw-bold">Code: <span class="fw-normal">{{ country.code }}</span></p>
+                        <p class="fw-bold">Continent: <span class="fw-normal">{{ country.continent }}</span></p>
+                        <p class="fw-bold">Population: <span class="fw-normal">{{ country.population }}</span></p>
+                        <p class="fw-bold">Local Name: <span class="fw-normal">{{ country.localname }}</span></p>
+                        <p class="fw-bold">Surface Area: <span class="fw-normal">{{ country.surfacearea }}</span></p>
+                        <p class="fw-bold">Capital: <span class="fw-normal">{{ country.capital }}</span></p>
+                        <p class="fw-bold">Region: <span class="fw-normal">{{ country.region }}</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
