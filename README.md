@@ -30,25 +30,25 @@
 ##setup database
 * ->open PanorbitBackendAssignment > settings.py
 * DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'world',
-        'USER': '',
-        'PASSWORD': ''
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-    }
-}
+*     'default': {
+*         'ENGINE': 'django.db.backends.mysql',
+*         'NAME': 'world',
+*         'USER': '',
+*         'PASSWORD': ''
+*         'HOST': '127.0.0.1',
+*         'PORT': '3306',
+*     }
+* }
 
 ##setupt smtp mail sending
 * ->open PanorbitBackendAssignment > settings.py
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = ''
+* EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+* EMAIL_HOST = 'smtp.gmail.com'
+* EMAIL_HOST_USER = ''
+* EMAIL_HOST_PASSWORD = ''
+* EMAIL_PORT = 587
+* EMAIL_USE_TLS = True
+* DEFAULT_FROM_EMAIL = ''
 
 ##migrate models
 * ->python manage.py makemigrations
@@ -60,37 +60,37 @@ DEFAULT_FROM_EMAIL = ''
 * Note: Project path is mandatory to open in terminal to execute all commands
 
 ##api endpoints
-* 
-* //signup
+
+//signup
 * ->http://127.0.0.1:8000/api/signup
 * ->method- POST
 * -> request body
-{
-    "first_name":"",
-    "last_name":"",
-    "email":"",
-    "gender":"M", //('M', 'Male'),('F', 'Female'),('O', 'Other')
-    "phone_number":""
-}
+* {
+*     "first_name":"",
+*     "last_name":"",
+*     "email":"",
+*     "gender":"M", //('M', 'Male'),('F', 'Female'),('O', 'Other')
+*     "phone_number":""
+* }
 
-* //login
+//login
 * ->http://127.0.0.1:8000/api/login
 * ->method- POST
-{
-    "mobile":""
-}
+* {
+*     "mobile":""
+* }
 
-* //otp verify
+//otp verify
 * ->http://127.0.0.1:8000/api/otp_verify/{phone_number}
 * ->method- POST
-{
-    "otp":""
-}
+* {
+*     "otp":""
+* }
 
-* //re send otp
+//re send otp
 * ->http://127.0.0.1:8000/api/re_send_otp/{phone_number}
 * ->method- GET
 
-* //logout
+//logout
 * ->http://127.0.0.1:8000/api/logout
 * ->method- DELETE
