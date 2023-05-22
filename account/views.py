@@ -11,6 +11,7 @@ from django.utils import timezone
 from itertools import chain
 from django.http import JsonResponse
 from django.core.paginator import Paginator
+from django.db.models import F,CharField, Value
 # Create your views here.
 
 
@@ -130,9 +131,9 @@ def autosuggest(request):
     search = request.GET.get('search', None)
     results = []
     if search is not None:
-        city = City.objects.filter(name__istartswith=search).values()
-        country = Country.objects.filter(name__istartswith=search).values()
-        language = Countrylanguage.objects.filter(language__istartswith=search).values()
+        city = City.objects.filter(name__istartswith=search).values('name').annotate(type=Value('city',output_field=CharField()))
+        country = Country.objects.filter(name__istartswith=search).values('name','code').annotate(type=Value('country',output_field=CharField()))
+        language = Countrylanguage.objects.filter(language__istartswith=search).values(name=F('language')).annotate(type=Value('language',output_field=CharField()))
         results = chain(city, country, language)
     return JsonResponse(list(results), safe=False)
 

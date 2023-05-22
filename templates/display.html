@@ -52,6 +52,7 @@
         {% empty %}
             <p class="text-danger fw-bold">No result found!.</p>
         {% endfor %}
+    <!-- pagination start -->
     {% if count > 0 %}
     <nav aria-label="Page navigation example " style="margin-top: 10px!important;">
     <div class="row">
@@ -108,5 +109,6 @@
     </div>
         </nav>
     {% endif %}
+    <!-- pagination end -->
     </div>
 {% endblock %}

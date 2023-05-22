@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
     <div class="col-lg-6 mx-auto">
         <div class="card shadow-sm">
             <div class="card-body p-5">
                 <h1 class="text-center">Dashboard</h1>
                 <form action="{% url 'account:display' %}" method="GET">
-                    <input type="text" name="search" class="form-control form-control-lg shadow-sm"
-                           placeholder="Search by city, country, or language">
+                    <div class="searchInput">
+                        <input type="text" name="search" id="search" class="form-control form-control-lg shadow-sm"
+                               placeholder="Search by city, country, or language">
+                        <div class="list-group list-group-flush shadow-sm" id="autosuggest-results" style="z-index: 10;position: absolute;width: 85%"></div>
+                    </div>
                     <div class="d-grid gap-2 col-4 mx-auto mt-4">
                         <button class="btn btn-primary" type="submit">Search</button>
                     </div>
@@ -14,4 +18,5 @@
             </div>
         </div>
     </div>
+    <script src="{% static 'autosuggest.js' %}"></script>
 {% endblock %}
