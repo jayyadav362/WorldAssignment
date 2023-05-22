@@ -14,11 +14,11 @@
 * https://dev.mysql.com/doc/mysql-installation-excerpt/8.0/en/macos-installation-pkg.html
 
 ##populate world.sql file in database
-* //from workbench
+//from workbench
 * ->open workbench connect database with credentials
 * ->click on Data Import/Restore > Import from Self-Contained file > choose world.sql file > Start Import
 
-* //from terminal
+//from terminal
 * ->mysql -u root -p
 * ->enter root password
 * ->create database world;
