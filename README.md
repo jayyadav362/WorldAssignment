@@ -30,15 +30,15 @@
 ##setup database
 * ->open PanorbitBackendAssignment > settings.py
 * DATABASES = {
-*     'default': {
-*         'ENGINE': 'django.db.backends.mysql',
-*         'NAME': 'world',
-*         'USER': '',
-*         'PASSWORD': ''
-*         'HOST': '127.0.0.1',
-*         'PORT': '3306',
-*     }
-* }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'world',
+        'USER': '',
+        'PASSWORD': ''
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    }
+}
 
 ##setupt smtp mail sending
 * ->open PanorbitBackendAssignment > settings.py
@@ -66,25 +66,25 @@
 * ->method- POST
 * -> request body
 * {
-*     "first_name":"",
-*     "last_name":"",
-*     "email":"",
-*     "gender":"M", //('M', 'Male'),('F', 'Female'),('O', 'Other')
-*     "phone_number":""
+    "first_name":"",
+    "last_name":"",
+    "email":"",
+    "gender":"M", //('M', 'Male'),('F', 'Female'),('O', 'Other')
+    "phone_number":""
 * }
 
 //login
 * ->http://127.0.0.1:8000/api/login
 * ->method- POST
 * {
-*     "mobile":""
+    "mobile":""
 * }
 
 //otp verify
 * ->http://127.0.0.1:8000/api/otp_verify/{phone_number}
 * ->method- POST
 * {
-*     "otp":""
+    "otp":""
 * }
 
 //re send otp
